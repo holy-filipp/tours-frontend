@@ -10,13 +10,17 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.7.1",
     "@nuxt/eslint": "^1.9.0",
-    "@nuxt/ui": "^4.0.0",
+    "@nuxt/ui": "^4.0.1",
+    "better-sqlite3": "^12.4.1",
     "eslint": "^9.36.0",
     "lucide-vue-next": "^0.544.0",
+    "maska": "^3.2.0",
     "nuxt": "^4.1.2",
     "nuxt-svgo": "^4.2.6",
     "typescript": "^5.9.3",
+    "valibot": "^1.1.0",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
   },

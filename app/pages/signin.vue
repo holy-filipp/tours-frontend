@@ -1,5 +1,5 @@
 <template>
-  <IndexPage />
+  <SignIn />
 </template>
 
 <script lang="ts" setup>

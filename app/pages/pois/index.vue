@@ -1,5 +1,5 @@
 <template>
-  <IndexPage />
+  <POIsExplorer />
 </template>
 
 <script lang="ts" setup>
