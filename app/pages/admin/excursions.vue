@@ -1,13 +1,14 @@
 <template>
   <UDashboardPanel>
     <template #body>
-      <p>Hello, select something</p>
+      <ExcursionsView />
     </template>
   </UDashboardPanel>
 </template>
 
 <script lang="ts" setup>
 
+import ExcursionsView from "~/components/admin/ExcursionsView.vue";
 </script>
 
 <style lang="scss" scoped>
