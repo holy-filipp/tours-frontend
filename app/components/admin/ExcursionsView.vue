@@ -1,5 +1,8 @@
 <template>
-  <UTable :data="TEST_DATA" :columns="COLUMNS" :get-sub-rows="(row) => row.points" />
+  <div class="space-y-4">
+    <UButton to="/admin/excursions/create" icon="i-lucide-plus">Добавить экскурсию</UButton>
+    <UTable :data="TEST_DATA" :columns="COLUMNS" :get-sub-rows="(row) => row.points" />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -44,6 +47,10 @@ const TEST_DATA: FullExcursion[] = [
 ]
 const COLUMNS: TableColumn<FullExcursion>[] = [
   {
+    accessorKey: 'trip.id',
+    header: '№'
+  },
+  {
     accessorKey: 'route.start_location',
     header: 'Точка начала',
   },
@@ -54,7 +61,18 @@ const COLUMNS: TableColumn<FullExcursion>[] = [
       return `${row.original.route.duration} дн.`
     }
   },
-
+  {
+    accessorKey: 'points',
+    header: 'Количество точек',
+    cell: ({ row }) => {
+      return row.original.points.length
+    }
+  },
+  {
+    accessorKey: 'trip.price',
+    header: 'Цена',
+    cell: ({ row }) => `${row.original.trip.price} руб.`
+  },
 ]
 </script>
 
