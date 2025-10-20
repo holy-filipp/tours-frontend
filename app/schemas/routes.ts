@@ -6,3 +6,10 @@ export const routeSchema = v.object({
 })
 
 export type IRouteSchema = v.InferOutput<typeof routeSchema>
+
+export const routePointSchema = v.object({
+  point_id: v.pipe(v.number('Точка не выбрана')),
+  day_of_the_route: v.pipe(v.number('День маршрута не выбран'))
+})
+
+export type IRoutePointSchema = v.InferOutput<typeof routePointSchema>

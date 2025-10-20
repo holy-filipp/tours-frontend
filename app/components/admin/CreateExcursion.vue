@@ -26,6 +26,9 @@
         }"
       />
     </UFormField>
+    <UFormField name="route_id" label="Маршрут">
+      <USelect v-model="state.route_id" placeholder="Выберите маршрут" :items="items" class="w-full" />
+    </UFormField>
     <UButton type="submit" icon="i-lucide-plus" block class="w-full">Создать</UButton>
   </UForm>
 </template>
@@ -34,6 +37,7 @@
 import UDatePicker from "~/components/ui/UDatePicker.vue";
 import {excursionSchema} from "~/schemas/excursions";
 import {createDateFromTimeString} from "~/utils/time";
+import type {SelectItem} from "#ui/components/Select.vue";
 
 const state = reactive({
   starts_at: undefined,
@@ -41,8 +45,20 @@ const state = reactive({
   capacity: 0,
   min_age: 0,
   price: 0,
+  route_id: undefined,
 })
 const time = ref<string>('')
+
+const items = ref<SelectItem[]>([
+  {
+    label: 'Маршрут 1',
+    value: 1,
+  },
+  {
+    label: 'Маршрут 2',
+    value: 2
+  }
+])
 
 watch(time, (v: string) => {
   return state.starts_at_time = createDateFromTimeString(v)

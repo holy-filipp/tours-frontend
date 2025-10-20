@@ -21,6 +21,7 @@
 
 <script lang="ts" setup>
 import {pointSchema} from "~/schemas/points";
+import type {SelectItem} from "#ui/components/Select.vue";
 
 const state = reactive({
   name: '',
