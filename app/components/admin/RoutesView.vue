@@ -1,67 +1,40 @@
 <template>
   <div class="space-y-4">
-    <UButton to="/admin/excursions/create" icon="i-lucide-plus">Добавить экскурсию</UButton>
+    <UButton to="/admin/routes/create" icon="i-lucide-plus">Добавить маршрут</UButton>
     <UTable :data="TEST_DATA" :columns="COLUMNS" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {IExcursion} from "~/types/excursions";
 import type {TableColumn} from "#ui/components/Table.vue";
 import type { Row } from '@tanstack/vue-table'
+import type {IRoute} from "~/types/routes";
 
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
-const TEST_DATA: IExcursion[] = [
+const TEST_DATA: IRoute[] = [
   {
-    "starts_at": "2000-01-01 08:00",
-    "capacity": 5,
-    "min_age": 16,
-    "price": 9999,
-    "route_id": 1,
+    "id": 1,
+    "duration": 10,
+    "start_location": "Ижевск",
     "updated_at": "2000-01-01T00:00:00.000000Z",
-    "created_at": "2000-01-01T00:00:00.000000Z",
-    "id": 1
+    "created_at": "2000-01-01T00:00:00.000000Z"
   }
 ]
-const COLUMNS: TableColumn<IExcursion>[] = [
+const COLUMNS: TableColumn<IRoute>[] = [
   {
     accessorKey: 'id',
     header: '№'
   },
   {
-    accessorKey: 'capacity',
-    header: 'Количество мест'
+    accessorKey: 'start_location',
+    header: 'Точка начала'
   },
   {
-    accessorKey: 'min_age',
-    header: 'Минимальный возраст',
-    cell: ({ row }) => {
-      const ruOrdinalRules = new Intl.PluralRules("ru-RU");
-      const val = row.getValue('min_age') as number
-      const variant = ruOrdinalRules.select(val);
-      const map: Partial<Record<Intl.LDMLPluralRule, string>> = {
-        'one': 'год',
-        'many': 'лет',
-        'few': 'года',
-      }
-
-      return `${val} ${map[variant]}`
-    }
-  },
-  {
-    accessorKey: 'price',
-    header: 'Цена',
-    cell: ({ row }) => `${row.getValue('price')} руб.`
-  },
-  {
-    accessorKey: 'route_id',
-    header: '№ привязанного маршрута',
-  },
-  {
-    accessorKey: 'starts_at',
-    header: 'Время начала'
+    accessorKey: 'duration',
+    header: 'Длительность',
+    cell: ({ row }) => `${row.original.duration} дн.`
   },
   {
     id: 'actions',
@@ -94,7 +67,7 @@ const COLUMNS: TableColumn<IExcursion>[] = [
 
 const router = useRouter()
 
-function getRowItems(row: Row<IExcursion>) {
+function getRowItems(row: Row<IRoute>) {
   return [
     {
       type: 'label',
@@ -106,7 +79,7 @@ function getRowItems(row: Row<IExcursion>) {
         const id = row.original.id
 
         router.push({
-          name: 'admin-excursions-edit-id',
+          name: 'admin-routes-edit-id',
           params: {
             id
           }

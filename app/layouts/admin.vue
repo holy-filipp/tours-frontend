@@ -26,8 +26,18 @@ const ITEMS: NavigationMenuItem[] = [
   },
   {
     label: 'Экскурсии',
-    icon: 'i-lucide-route',
+    icon: 'i-lucide-list',
     to: '/admin/excursions'
+  },
+  {
+    label: 'Маршруты',
+    icon: 'i-lucide-route',
+    to: '/admin/routes'
+  },
+  {
+    label: 'Точки',
+    icon: 'i-lucide-map-pin',
+    to: '/admin/points'
   }
 ]
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <CreateExcursion />
+  <UDashboardPanel>
+    <template #body>
+      <CreateExcursion />
+    </template>
+  </UDashboardPanel>
 </template>
 
 <script lang="ts" setup>

@@ -1,67 +1,62 @@
 <template>
   <div class="space-y-4">
-    <UButton to="/admin/excursions/create" icon="i-lucide-plus">Добавить экскурсию</UButton>
-    <UTable :data="TEST_DATA" :columns="COLUMNS" />
+    <UButton to="/admin/points/create" icon="i-lucide-plus">Добавить точку</UButton>
+    <UTable v-model:expanded="expanded" :data="TEST_DATA" :columns="COLUMNS">
+      <template #expanded="{ row }">
+        <img class="h-64" src="/pCobXrHQoHbiI2JDiWMJj8zVKLEu26qFIMogpwcD.jpg" alt="Point image">
+      </template>
+    </UTable>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {IExcursion} from "~/types/excursions";
 import type {TableColumn} from "#ui/components/Table.vue";
 import type { Row } from '@tanstack/vue-table'
+import type {IPoint} from "~/types/points";
 
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
-const TEST_DATA: IExcursion[] = [
+const TEST_DATA: IPoint[] = [
   {
-    "starts_at": "2000-01-01 08:00",
-    "capacity": 5,
-    "min_age": 16,
-    "price": 9999,
-    "route_id": 1,
+    "id": 1,
+    "name": "Тестовая точка",
+    "description": "Тестовое описание",
+    "file_name": "points/pCobXrHQoHbiI2JDiWMJj8zVKLEu26qFIMogpwcD.jpg",
     "updated_at": "2000-01-01T00:00:00.000000Z",
-    "created_at": "2000-01-01T00:00:00.000000Z",
-    "id": 1
+    "created_at": "2000-01-01T00:00:00.000000Z"
   }
 ]
-const COLUMNS: TableColumn<IExcursion>[] = [
+const COLUMNS: TableColumn<IPoint>[] = [
+  {
+    id: 'expand',
+    cell: ({ row }) =>
+      h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        icon: 'i-lucide-chevron-down',
+        square: true,
+        'aria-label': 'Expand',
+        ui: {
+          leadingIcon: [
+            'transition-transform',
+            row.getIsExpanded() ? 'duration-200 rotate-180' : ''
+          ]
+        },
+        onClick: () => row.toggleExpanded()
+      })
+  },
   {
     accessorKey: 'id',
     header: '№'
   },
   {
-    accessorKey: 'capacity',
-    header: 'Количество мест'
+    accessorKey: 'name',
+    header: 'Название',
   },
   {
-    accessorKey: 'min_age',
-    header: 'Минимальный возраст',
-    cell: ({ row }) => {
-      const ruOrdinalRules = new Intl.PluralRules("ru-RU");
-      const val = row.getValue('min_age') as number
-      const variant = ruOrdinalRules.select(val);
-      const map: Partial<Record<Intl.LDMLPluralRule, string>> = {
-        'one': 'год',
-        'many': 'лет',
-        'few': 'года',
-      }
-
-      return `${val} ${map[variant]}`
-    }
-  },
-  {
-    accessorKey: 'price',
-    header: 'Цена',
-    cell: ({ row }) => `${row.getValue('price')} руб.`
-  },
-  {
-    accessorKey: 'route_id',
-    header: '№ привязанного маршрута',
-  },
-  {
-    accessorKey: 'starts_at',
-    header: 'Время начала'
+    accessorKey: 'description',
+    header: 'Описание',
   },
   {
     id: 'actions',
@@ -92,9 +87,10 @@ const COLUMNS: TableColumn<IExcursion>[] = [
   }
 ]
 
+const expanded = ref<Record<number, boolean>>({})
 const router = useRouter()
 
-function getRowItems(row: Row<IExcursion>) {
+function getRowItems(row: Row<IPoint>) {
   return [
     {
       type: 'label',
@@ -106,7 +102,7 @@ function getRowItems(row: Row<IExcursion>) {
         const id = row.original.id
 
         router.push({
-          name: 'admin-excursions-edit-id',
+          name: 'admin-points-edit-id',
           params: {
             id
           }

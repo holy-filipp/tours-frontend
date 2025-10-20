@@ -1,5 +1,5 @@
 <template>
-  <UPageHeader title="Создать экскурсию" description="Создайте экскурсию и всё" />
+  <UPageHeader title="Редактировать экскурсию" description="Да, это просто скопированная форма создания .-." />
   <UForm :state="state" :schema="excursionSchema" class="space-y-4">
     <div class="flex flex-row gap-2">
       <UFormField name="starts_at" label="Дата начала">
@@ -20,13 +20,13 @@
         v-model="state.price"
         class="w-full"
         :format-options="{
-          style: 'currency',
-          currency: 'RUB',
-          currencyDisplay: 'symbol'
-        }"
+              style: 'currency',
+              currency: 'RUB',
+              currencyDisplay: 'symbol'
+            }"
       />
     </UFormField>
-    <UButton type="submit" icon="i-lucide-plus" block class="w-full">Создать</UButton>
+    <UButton type="submit" icon="i-lucide-pencil" block class="w-full">Изменить</UButton>
   </UForm>
 </template>
 

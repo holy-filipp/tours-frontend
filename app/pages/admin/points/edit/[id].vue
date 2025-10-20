@@ -1,13 +1,13 @@
 <template>
   <UDashboardPanel>
     <template #body>
-      <ExcursionsView />
+      <EditPoint />
     </template>
   </UDashboardPanel>
 </template>
 
 <script lang="ts" setup>
-import ExcursionsView from "~/components/admin/ExcursionsView.vue";
+import EditPoint from "~/components/admin/EditPoint.vue";
 </script>
 
 <style lang="scss" scoped>
