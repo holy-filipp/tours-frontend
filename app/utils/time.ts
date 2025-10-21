@@ -16,3 +16,7 @@ export function createDateFromTimeString(timeString: string) {
 
   return now;
 }
+
+export function createDateStringFromDate(date: Date) {
+  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+}

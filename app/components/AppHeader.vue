@@ -58,5 +58,5 @@ const DROPDOWN: DropdownMenuItem[] = [
     color: 'error'
   }
 ]
-const isAuthed = ref<boolean>(true)
+const isAuthed = ref<boolean>(false)
 </script>

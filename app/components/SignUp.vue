@@ -66,6 +66,8 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import * as v from 'valibot'
 import UDatePicker from "~/components/ui/UDatePicker.vue";
 import { UserPlus } from 'lucide-vue-next'
+import {signupMutation} from "~/client/@pinia/colada.gen";
+import {createDateStringFromDate} from "~/utils/time";
 
 const schema = v.object({
   email: v.pipe(v.string('Пустой email'), v.email('Неправильный email')),
@@ -92,8 +94,29 @@ const state = reactive({
 const passwordVisibility = ref<boolean>(false)
 const repeatPasswordVisibility = ref<boolean>(false)
 
+const signup = useMutation({
+  ...signupMutation(),
+  onError: (error) => {
+    console.log(error)
+  }
+})
+
 const onSubmit = (payload: FormSubmitEvent<Schema>) => {
   console.log(payload)
+
+  console.log(signup.mutate({
+    headers: {
+      'Accept': 'application/json'
+    },
+    body: {
+      first_name: payload.data.first_name,
+      last_name: payload.data.last_name,
+      patronymic: payload.data?.patronymic,
+      birthday: createDateStringFromDate(payload.data.birthday),
+      email: payload.data.email,
+      password: payload.data.password
+    }
+  }))
 }
 </script>
 
