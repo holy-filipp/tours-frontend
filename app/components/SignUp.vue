@@ -104,10 +104,7 @@ const signup = useMutation({
 const onSubmit = (payload: FormSubmitEvent<Schema>) => {
   console.log(payload)
 
-  console.log(signup.mutate({
-    headers: {
-      'Accept': 'application/json'
-    },
+  signup.mutate({
     body: {
       first_name: payload.data.first_name,
       last_name: payload.data.last_name,
@@ -116,7 +113,7 @@ const onSubmit = (payload: FormSubmitEvent<Schema>) => {
       email: payload.data.email,
       password: payload.data.password
     }
-  }))
+  })
 }
 </script>
 
