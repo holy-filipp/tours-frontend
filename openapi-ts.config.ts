@@ -9,5 +9,6 @@ export default defineConfig({
       queryOptions: true,
       queryKeys: true
     },
+    '@hey-api/client-nuxt'
   ],
 });

@@ -4,31 +4,13 @@ import { type _JSONValue, defineQueryOptions, type UseMutationOptions } from '@p
 
 import { serializeQueryKeyValue } from '../client';
 import { client } from '../client.gen';
-import { b3A9Db44Be281C210Db1Dc5686205879, b5A8E97C01De37E7F49653D, be28363C04C1Cd7C100107417E944C1, bedf832894D55C9C5A4693541B0B2A5, c3893Ea1Ca41948Fc2Ab2Ef3A0209, d872D3E3A28C31D4C30C076F70E11D7, e55709238E32Fe7D749B26E30, ffba1E96F748Cd3857A2B9482Cef3Eb, type Options, signup } from '../sdk.gen';
-import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Error, B3A9Db44Be281C210Db1Dc5686205879Response, B5A8E97C01De37E7F49653dData, Be28363C04C1Cd7C100107417E944C1Data, Bedf832894D55C9C5A4693541B0B2A5Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Error, C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Error, D872D3E3A28C31D4C30C076F70E11D7Response, E55709238E32Fe7D749B26E30Data, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
-
-/**
- * Создать новую достопримечательность
- *
- * Создаёт и возвращает новую достопримечательность в случае успеха
- */
-export const b3A9Db44Be281C210Db1Dc5686205879Mutation = (options?: Partial<Options<B3A9Db44Be281C210Db1Dc5686205879Data>>): UseMutationOptions<B3A9Db44Be281C210Db1Dc5686205879Response, Options<B3A9Db44Be281C210Db1Dc5686205879Data>, B3A9Db44Be281C210Db1Dc5686205879Error> => {
-    return {
-        mutation: async (fnOptions) => {
-            const { data } = await b3A9Db44Be281C210Db1Dc5686205879({
-                ...options,
-                ...fnOptions,
-                throwOnError: true
-            });
-            return data;
-        }
-    };
-};
+import { b3A9Db44Be281C210Db1Dc5686205879, b5A8E97C01De37E7F49653D, be28363C04C1Cd7C100107417E944C1, bedf832894D55C9C5A4693541B0B2A5, c3893Ea1Ca41948Fc2Ab2Ef3A0209, d872D3E3A28C31D4C30C076F70E11D7, e55709238E32Fe7D749B26E30, ffba1E96F748Cd3857A2B9482Cef3Eb, getCsrfCookie, type Options, signup } from '../sdk.gen';
+import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Error, B3A9Db44Be281C210Db1Dc5686205879Response, B5A8E97C01De37E7F49653dData, B5A8E97C01De37E7F49653dResponse, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Response, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Response, C3893Ea1Ca41948Fc2Ab2Ef3A0209Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Error, C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Error, D872D3E3A28C31D4C30C076F70E11D7Response, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Response, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, GetCsrfCookieData, GetCsrfCookieResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'path'> & {
         _id: string;
-        baseUrl?: _JSONValue;
+        baseURL?: _JSONValue;
         body?: _JSONValue;
         query?: _JSONValue;
         tags?: _JSONValue;
@@ -38,7 +20,7 @@ export type QueryKey<TOptions extends Options> = [
 const createQueryKey = <TOptions extends Options>(id: string, options?: TOptions, tags?: ReadonlyArray<string>): [
     QueryKey<TOptions>[0]
 ] => {
-    const params: QueryKey<TOptions>[0] = { _id: id, baseUrl: options?.baseUrl || (options?.client ?? client).getConfig().baseUrl } as QueryKey<TOptions>[0];
+    const params: QueryKey<TOptions>[0] = { _id: id, baseURL: options?.baseURL || (options?.client ?? client).getConfig().baseURL } as QueryKey<TOptions>[0];
     if (tags) {
         params.tags = tags as unknown as _JSONValue;
     }
@@ -62,14 +44,51 @@ const createQueryKey = <TOptions extends Options>(id: string, options?: TOptions
     ];
 };
 
-export const e55709238E32Fe7D749B26E30QueryKey = (options?: Options<E55709238E32Fe7D749B26E30Data>) => createQueryKey('e55709238E32Fe7D749B26E30', options);
+export const getCsrfCookieQueryKey = (options?: Omit<Options<TComposable, GetCsrfCookieData, GetCsrfCookieResponse, DefaultT>, 'composable'>) => createQueryKey('getCsrfCookie', options);
+
+/**
+ * Получить CSRF токен
+ *
+ * Генерирует и возвращает в XSRF-TOKEN cookie новый CSRF токен
+ */
+export const getCsrfCookieQuery = defineQueryOptions((options: Omit<Options<TComposable, GetCsrfCookieData, GetCsrfCookieResponse, DefaultT>, 'composable'>) => ({
+    key: getCsrfCookieQueryKey(options),
+    query: async (context) => {
+        const { data } = await getCsrfCookie({
+            ...options,
+            ...context,
+            throwOnError: true
+        });
+        return data;
+    }
+}));
+
+/**
+ * Создать новую достопримечательность
+ *
+ * Создаёт и возвращает новую достопримечательность в случае успеха
+ */
+export const b3A9Db44Be281C210Db1Dc5686205879Mutation = (options?: Partial<Omit<Options<TComposable, B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Response, DefaultT>, 'composable'>>): UseMutationOptions<B3A9Db44Be281C210Db1Dc5686205879Response, Omit<Options<TComposable, B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Response, DefaultT>, 'composable'>, B3A9Db44Be281C210Db1Dc5686205879Error> => {
+    return {
+        mutation: async (fnOptions: Partial<Omit<Options<TComposable, B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Response, DefaultT>, 'composable'>>) => {
+            const { data } = await b3A9Db44Be281C210Db1Dc5686205879({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+};
+
+export const e55709238E32Fe7D749B26E30QueryKey = (options?: Omit<Options<TComposable, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Response, DefaultT>, 'composable'>) => createQueryKey('e55709238E32Fe7D749B26E30', options);
 
 /**
  * Получить список достопримечательностей
  *
  * Возвращает список всех достопримечательностей
  */
-export const e55709238E32Fe7D749B26E30Query = defineQueryOptions((options?: Options<E55709238E32Fe7D749B26E30Data>) => ({
+export const e55709238E32Fe7D749B26E30Query = defineQueryOptions((options: Omit<Options<TComposable, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Response, DefaultT>, 'composable'>) => ({
     key: e55709238E32Fe7D749B26E30QueryKey(options),
     query: async (context) => {
         const { data } = await e55709238E32Fe7D749B26E30({
@@ -81,14 +100,14 @@ export const e55709238E32Fe7D749B26E30Query = defineQueryOptions((options?: Opti
     }
 }));
 
-export const b5A8E97C01De37E7F49653dQueryKey = (options?: Options<B5A8E97C01De37E7F49653dData>) => createQueryKey('b5A8E97C01De37E7F49653D', options);
+export const b5A8E97C01De37E7F49653dQueryKey = (options?: Omit<Options<TComposable, B5A8E97C01De37E7F49653dData, B5A8E97C01De37E7F49653dResponse, DefaultT>, 'composable'>) => createQueryKey('b5A8E97C01De37E7F49653D', options);
 
 /**
  * Контент по Удмуртии
  *
  * Возвращает статический контент в формате markdown для страницы
  */
-export const b5A8E97C01De37E7F49653dQuery = defineQueryOptions((options?: Options<B5A8E97C01De37E7F49653dData>) => ({
+export const b5A8E97C01De37E7F49653dQuery = defineQueryOptions((options: Omit<Options<TComposable, B5A8E97C01De37E7F49653dData, B5A8E97C01De37E7F49653dResponse, DefaultT>, 'composable'>) => ({
     key: b5A8E97C01De37E7F49653dQueryKey(options),
     query: async (context) => {
         const { data } = await b5A8E97C01De37E7F49653D({
@@ -105,9 +124,9 @@ export const b5A8E97C01De37E7F49653dQuery = defineQueryOptions((options?: Option
  *
  * Загружает картинку для точки и возвращает её путь в случае успеха
  */
-export const ffba1E96F748Cd3857A2B9482Cef3EbMutation = (options?: Partial<Options<Ffba1E96F748Cd3857A2B9482Cef3EbData>>): UseMutationOptions<Ffba1E96F748Cd3857A2B9482Cef3EbResponse, Options<Ffba1E96F748Cd3857A2B9482Cef3EbData>, Ffba1E96F748Cd3857A2B9482Cef3EbError> => {
+export const ffba1E96F748Cd3857A2B9482Cef3EbMutation = (options?: Partial<Omit<Options<TComposable, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, DefaultT>, 'composable'>>): UseMutationOptions<Ffba1E96F748Cd3857A2B9482Cef3EbResponse, Omit<Options<TComposable, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, DefaultT>, 'composable'>, Ffba1E96F748Cd3857A2B9482Cef3EbError> => {
     return {
-        mutation: async (fnOptions) => {
+        mutation: async (fnOptions: Partial<Omit<Options<TComposable, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, DefaultT>, 'composable'>>) => {
             const { data } = await ffba1E96F748Cd3857A2B9482Cef3Eb({
                 ...options,
                 ...fnOptions,
@@ -123,9 +142,9 @@ export const ffba1E96F748Cd3857A2B9482Cef3EbMutation = (options?: Partial<Option
  *
  * Создаёт и возвращает новую экскурсию, маршрут и привязанные к нему точки. Всё в одном запросе
  */
-export const d872D3E3A28C31D4C30C076F70E11D7Mutation = (options?: Partial<Options<D872D3E3A28C31D4C30C076F70E11D7Data>>): UseMutationOptions<D872D3E3A28C31D4C30C076F70E11D7Response, Options<D872D3E3A28C31D4C30C076F70E11D7Data>, D872D3E3A28C31D4C30C076F70E11D7Error> => {
+export const d872D3E3A28C31D4C30C076F70E11D7Mutation = (options?: Partial<Omit<Options<TComposable, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Response, DefaultT>, 'composable'>>): UseMutationOptions<D872D3E3A28C31D4C30C076F70E11D7Response, Omit<Options<TComposable, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Response, DefaultT>, 'composable'>, D872D3E3A28C31D4C30C076F70E11D7Error> => {
     return {
-        mutation: async (fnOptions) => {
+        mutation: async (fnOptions: Partial<Omit<Options<TComposable, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Response, DefaultT>, 'composable'>>) => {
             const { data } = await d872D3E3A28C31D4C30C076F70E11D7({
                 ...options,
                 ...fnOptions,
@@ -136,14 +155,14 @@ export const d872D3E3A28C31D4C30C076F70E11D7Mutation = (options?: Partial<Option
     };
 };
 
-export const be28363C04C1Cd7C100107417E944C1QueryKey = (options?: Options<Be28363C04C1Cd7C100107417E944C1Data>) => createQueryKey('be28363C04C1Cd7C100107417E944C1', options);
+export const be28363C04C1Cd7C100107417E944C1QueryKey = (options?: Omit<Options<TComposable, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Response, DefaultT>, 'composable'>) => createQueryKey('be28363C04C1Cd7C100107417E944C1', options);
 
 /**
  * Получить все экскурсии
  *
  * Запрос для получения списка всех экскурсий вместе с точками и маршрутами (пагинация лень пока)
  */
-export const be28363C04C1Cd7C100107417E944C1Query = defineQueryOptions((options?: Options<Be28363C04C1Cd7C100107417E944C1Data>) => ({
+export const be28363C04C1Cd7C100107417E944C1Query = defineQueryOptions((options: Omit<Options<TComposable, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Response, DefaultT>, 'composable'>) => ({
     key: be28363C04C1Cd7C100107417E944C1QueryKey(options),
     query: async (context) => {
         const { data } = await be28363C04C1Cd7C100107417E944C1({
@@ -155,14 +174,14 @@ export const be28363C04C1Cd7C100107417E944C1Query = defineQueryOptions((options?
     }
 }));
 
-export const bedf832894D55C9C5A4693541B0B2A5QueryKey = (options: Options<Bedf832894D55C9C5A4693541B0B2A5Data>) => createQueryKey('bedf832894D55C9C5A4693541B0B2A5', options);
+export const bedf832894D55C9C5A4693541B0B2A5QueryKey = (options: Omit<Options<TComposable, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Response, DefaultT>, 'composable'>) => createQueryKey('bedf832894D55C9C5A4693541B0B2A5', options);
 
 /**
  * Поиск по экскурсиям, точкам и маршрутам
  *
  * Запрос для поиска по всем маршрутам, точкам и экскурсиям. Ищет в полях description, name и start_location
  */
-export const bedf832894D55C9C5A4693541B0B2A5Query = defineQueryOptions((options: Options<Bedf832894D55C9C5A4693541B0B2A5Data>) => ({
+export const bedf832894D55C9C5A4693541B0B2A5Query = defineQueryOptions((options: Omit<Options<TComposable, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Response, DefaultT>, 'composable'>) => ({
     key: bedf832894D55C9C5A4693541B0B2A5QueryKey(options),
     query: async (context) => {
         const { data } = await bedf832894D55C9C5A4693541B0B2A5({
@@ -179,9 +198,9 @@ export const bedf832894D55C9C5A4693541B0B2A5Query = defineQueryOptions((options:
  *
  * Создаёт и возвращает нового пользователя в случае успеха
  */
-export const signupMutation = (options?: Partial<Options<SignupData>>): UseMutationOptions<SignupResponse, Options<SignupData>, SignupError> => {
+export const signupMutation = (options?: Partial<Omit<Options<TComposable, SignupData, SignupResponse, DefaultT>, 'composable'>>): UseMutationOptions<SignupResponse, Omit<Options<TComposable, SignupData, SignupResponse, DefaultT>, 'composable'>, SignupError> => {
     return {
-        mutation: async (fnOptions) => {
+        mutation: async (fnOptions: Partial<Omit<Options<TComposable, SignupData, SignupResponse, DefaultT>, 'composable'>>) => {
             const { data } = await signup({
                 ...options,
                 ...fnOptions,
@@ -197,9 +216,9 @@ export const signupMutation = (options?: Partial<Options<SignupData>>): UseMutat
  *
  * Проверяет credentials и создаёт новый токен в случае успеха
  */
-export const c3893Ea1Ca41948Fc2Ab2Ef3A0209Mutation = (options?: Partial<Options<C3893Ea1Ca41948Fc2Ab2Ef3A0209Data>>): UseMutationOptions<C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, Options<C3893Ea1Ca41948Fc2Ab2Ef3A0209Data>, C3893Ea1Ca41948Fc2Ab2Ef3A0209Error> => {
+export const c3893Ea1Ca41948Fc2Ab2Ef3A0209Mutation = (options?: Partial<Omit<Options<TComposable, C3893Ea1Ca41948Fc2Ab2Ef3A0209Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, DefaultT>, 'composable'>>): UseMutationOptions<C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, Omit<Options<TComposable, C3893Ea1Ca41948Fc2Ab2Ef3A0209Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, DefaultT>, 'composable'>, C3893Ea1Ca41948Fc2Ab2Ef3A0209Error> => {
     return {
-        mutation: async (fnOptions) => {
+        mutation: async (fnOptions: Partial<Omit<Options<TComposable, C3893Ea1Ca41948Fc2Ab2Ef3A0209Data, C3893Ea1Ca41948Fc2Ab2Ef3A0209Response, DefaultT>, 'composable'>>) => {
             const { data } = await c3893Ea1Ca41948Fc2Ab2Ef3A0209({
                 ...options,
                 ...fnOptions,

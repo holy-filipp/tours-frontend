@@ -97,7 +97,7 @@ const repeatPasswordVisibility = ref<boolean>(false)
 const signup = useMutation({
   ...signupMutation(),
   onError: (error) => {
-    console.log(error)
+    console.log('SignUp.vue ERROR', error)
   }
 })
 
