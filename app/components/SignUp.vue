@@ -8,7 +8,7 @@
         <div class="text-xl text-pretty font-semibold text-highlighted">Регистрация</div>
         <div class="mt-1 text-base text-pretty text-muted">Создать новый аккаунт</div>
       </div>
-      <UForm :schema="schema" :state="state" class="space-y-5" @submit="onSubmit">
+      <UForm :schema="signupSchema" :state="state" class="space-y-5" @submit="onSubmit">
         <UFormField label="Email" name="email" required>
           <UInput v-model="state.email" class="w-full" />
         </UFormField>
@@ -50,36 +50,23 @@
             </template>
           </UInput>
         </UFormField>
+        <UAlert v-if="error" color="error" icon="i-lucide-info" :title="getPrettyMessage(error.message)" :description="getPrettyErrors(error.errors)" />
         <UButton
           type="submit"
           label="Продолжить"
           block
+          :loading="isLoading"
         />
       </UForm>
-      {{state.birthday}}
     </UPageCard>
   </UContainer>
 </template>
 
 <script lang="ts" setup>
-import type { FormSubmitEvent } from '@nuxt/ui'
-import * as v from 'valibot'
 import UDatePicker from "~/components/ui/UDatePicker.vue";
 import { UserPlus } from 'lucide-vue-next'
-import {signupMutation} from "~/client/@pinia/colada.gen";
-import {createDateStringFromDate} from "~/utils/time";
-
-const schema = v.object({
-  email: v.pipe(v.string('Пустой email'), v.email('Неправильный email')),
-  first_name: v.pipe(v.string('Пустое имя'), v.minLength(2, 'Минимальная длина имени 2 символа')),
-  last_name: v.pipe(v.string('Пустая фамилия'), v.minLength(2, 'Минимальная длина фамилии 2 символа')),
-  patronymic: v.optional(v.string()),
-  birthday: v.pipe(v.date('Пустая дата'), v.minValue(new Date(1901, 1, 1), 'Не ври, ты не старше 100 лет')),
-  password: v.pipe(v.string('Пустой пароль'), v.minLength(3, 'Минимальная длина пароля 3 символа')),
-  repeat_password: v.pipe(v.string('Пустой пароль'), v.minLength(3, 'Минимальная длина пароля 3 символа')),
-})
-
-type Schema = v.InferInput<typeof schema>
+import {signupSchema} from "~/schemas/signup";
+import {getPrettyErrors, getPrettyMessage} from "~/utils/errors";
 
 const state = reactive({
   'first_name': '',
@@ -93,28 +80,7 @@ const state = reactive({
 
 const passwordVisibility = ref<boolean>(false)
 const repeatPasswordVisibility = ref<boolean>(false)
-
-const signup = useMutation({
-  ...signupMutation(),
-  onError: (error) => {
-    console.log('SignUp.vue ERROR', error)
-  }
-})
-
-const onSubmit = (payload: FormSubmitEvent<Schema>) => {
-  console.log(payload)
-
-  signup.mutate({
-    body: {
-      first_name: payload.data.first_name,
-      last_name: payload.data.last_name,
-      patronymic: payload.data?.patronymic,
-      birthday: createDateStringFromDate(payload.data.birthday),
-      email: payload.data.email,
-      password: payload.data.password
-    }
-  })
-}
+const { onSubmit, isLoading, error } = useSignup()
 </script>
 
 <style lang="scss" scoped>

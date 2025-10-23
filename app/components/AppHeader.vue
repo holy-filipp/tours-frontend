@@ -4,7 +4,10 @@
       <Logo class="w-48" />
     </template>
     <UNavigationMenu :items="items" />
-    <template v-if="!isAuthed" #right>
+    <template v-if="user.isLoading" #right>
+      <USkeleton class="w-[100px] h-24" />
+    </template>
+    <template v-else-if="!user.isAuthed" #right>
       <UFieldGroup>
         <UButton variant="subtle" icon="i-lucide-log-in" to="/signin">Вход</UButton>
         <UButton icon="i-lucide-user-plus" to="/signup">Регистрация</UButton>
@@ -16,8 +19,8 @@
           :avatar="{
             src: 'https://i.pravatar.cc/300'
           }"
-          name="Филипп Подрядов"
-          description="Администратор"
+          :name="user.user.first_name"
+          :description="user.user.role"
         />
       </UDropdownMenu>
     </template>
@@ -58,5 +61,5 @@ const DROPDOWN: DropdownMenuItem[] = [
     color: 'error'
   }
 ]
-const isAuthed = ref<boolean>(false)
+const user = useUserStore()
 </script>

@@ -6,7 +6,7 @@
         "version": "0.0.1"
     },
     "paths": {
-        "/sanctum/csrf-cookie": {
+        "/api/sanctum/csrf-cookie": {
             "get": {
                 "tags": [
                     "Авторизация"
@@ -1434,7 +1434,7 @@
                 ],
                 "summary": "Войти в аккаунт",
                 "description": "Проверяет credentials и создаёт новый токен в случае успеха",
-                "operationId": "462c3893ea1ca41948fc2ab2ef3a0209",
+                "operationId": "signin",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1510,6 +1510,86 @@
                                                 "type": "string"
                                             },
                                             "example": []
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/me": {
+            "get": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Получить пользователя по сессии",
+                "description": "Возвращает пользователя из сессии если это возможно",
+                "operationId": "8120197dbf6b5752a156b9868aa8bd4e",
+                "responses": {
+                    "200": {
+                        "description": "Успешный вывод пользователя",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Session active"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Иван"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Иванов"
+                                                    },
+                                                    "patronymic": {
+                                                        "type": "string",
+                                                        "example": "Иванович"
+                                                    },
+                                                    "birthday": {
+                                                        "type": "string",
+                                                        "example": "2000-01-01T00:00:00.000000Z"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "foo@bar.com"
+                                                    },
+                                                    "role": {
+                                                        "type": "string",
+                                                        "example": "user"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Пользователь не авторизирован",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
                                         }
                                     },
                                     "type": "object"

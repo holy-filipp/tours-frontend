@@ -4,18 +4,25 @@
       <UAuthForm
         title="Вход"
         icon="i-lucide-user"
-        :schema="schema"
+        :schema="signinSchema"
         description="Войти в аккаунт за пару кликов"
         :fields="FIELDS"
+        :loading="isLoading"
         @submit="onSubmit"
-      />
+      >
+        <template #validation>
+          <UAlert v-if="error" color="error" icon="i-lucide-info" :title="getPrettyMessage(error.message)" :description="getPrettyErrors(error.errors)" />
+        </template>
+      </UAuthForm>
     </UPageCard>
   </UContainer>
 </template>
 
 <script lang="ts" setup>
-import type {AuthFormField, FormSubmitEvent} from '@nuxt/ui'
-import * as v from 'valibot'
+import type {AuthFormField} from '@nuxt/ui'
+import {signinSchema} from "~/schemas/signin";
+import {useSignin} from "~/composables/useSignin";
+import {getPrettyErrors, getPrettyMessage} from "~/utils/errors";
 
 const FIELDS: AuthFormField[] = [
   {
@@ -38,17 +45,7 @@ const FIELDS: AuthFormField[] = [
     label: 'Запомнить меня'
   }
 ]
-
-const schema = v.object({
-  email: v.pipe(v.string('Пустой email'), v.email('Неправильный email')),
-  password: v.pipe(v.string('Пустой пароль'), v.minLength(3, 'Минимальная длина пароля 3 символа')),
-  remember: v.optional(v.boolean(), false)
-})
-type Schema = v.InferInput<typeof schema>
-
-const onSubmit = (payload: FormSubmitEvent<Schema>) => {
-  console.log(payload)
-}
+const { onSubmit, isLoading, error } = useSignin()
 </script>
 
 <style lang="scss" scoped>
