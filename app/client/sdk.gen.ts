@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Errors, B3A9Db44Be281C210Db1Dc5686205879Responses, B5A8E97C01De37E7F49653dData, B5A8E97C01De37E7F49653dErrors, B5A8E97C01De37E7F49653dResponses, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Errors, Be28363C04C1Cd7C100107417E944C1Responses, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Errors, Bedf832894D55C9C5A4693541B0B2A5Responses, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Errors, D872D3E3A28C31D4C30C076F70E11D7Responses, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Errors, E55709238E32Fe7D749B26E30Responses, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbErrors, Ffba1E96F748Cd3857A2B9482Cef3EbResponses, GetCsrfCookieData, GetCsrfCookieResponses, GetUserData, GetUserErrors, GetUserResponses, SigninData, SigninErrors, SigninResponses, SignupData, SignupErrors, SignupResponses } from './types.gen';
+import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Errors, B3A9Db44Be281C210Db1Dc5686205879Responses, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Errors, Be28363C04C1Cd7C100107417E944C1Responses, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Errors, Bedf832894D55C9C5A4693541B0B2A5Responses, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Errors, D872D3E3A28C31D4C30C076F70E11D7Responses, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Errors, E55709238E32Fe7D749B26E30Responses, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbErrors, Ffba1E96F748Cd3857A2B9482Cef3EbResponses, GetCsrfCookieData, GetCsrfCookieResponses, GetUdmurtiaPageData, GetUdmurtiaPageErrors, GetUdmurtiaPageResponses, GetUserData, GetUserErrors, GetUserResponses, SigninData, SigninErrors, SigninResponses, SignupData, SignupErrors, SignupResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -64,8 +64,8 @@ export const e55709238E32Fe7D749B26E30 = <ThrowOnError extends boolean = false>(
  *
  * Возвращает статический контент в формате markdown для страницы
  */
-export const b5A8E97C01De37E7F49653D = <ThrowOnError extends boolean = false>(options?: Options<B5A8E97C01De37E7F49653dData, ThrowOnError>) => {
-    return (options?.client ?? client).get<B5A8E97C01De37E7F49653dResponses, B5A8E97C01De37E7F49653dErrors, ThrowOnError>({
+export const getUdmurtiaPage = <ThrowOnError extends boolean = false>(options?: Options<GetUdmurtiaPageData, ThrowOnError>) => {
+    return (options?.client ?? client).get<GetUdmurtiaPageResponses, GetUdmurtiaPageErrors, ThrowOnError>({
         url: '/api/content/udmurtia',
         ...options
     });

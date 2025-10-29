@@ -8,5 +8,7 @@ export default defineEventHandler(async (event) => {
 
   console.info(`[API][${event.method}] Request to ${target}`)
 
-  return proxyRequest(event, target)
+  return proxyRequest(event, target, {
+    headers: getRequestHeaders(event),
+  })
 })

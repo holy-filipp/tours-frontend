@@ -1,29 +1,54 @@
 import {client} from "~/client/client.gen";
+import type {ResolvedRequestOptions} from "~/client/client";
 
-export default defineNuxtPlugin(async () => {
-  await $fetch.raw('/api/sanctum/csrf-cookie')
+interface FetchResponse<T> extends Response {
+  _data?: T
+}
 
-  const cookie = useCookie('XSRF-TOKEN')
+export default defineNuxtPlugin({
+  name: 'setup-client',
+  async setup() {
+    // const cookie = useCookie('XSRF-TOKEN')
+    // let csrfPromise: Promise<FetchResponse<never>> | null = null
 
-  async function csrfInterceptor(request: Request) {
-    request.headers.set('X-XSRF-TOKEN', cookie.value)
-    request.headers.set('Accept', 'application/json')
-    return request
-  }
+    async function csrfInterceptor(request: Request) {
+      // if (csrfPromise) {
+      //   await csrfPromise
+      // }
 
-  client.interceptors.request.use(csrfInterceptor)
+      // request.headers.set('X-XSRF-TOKEN', cookie.value)
+      request.headers.set('Accept', 'application/json')
 
-  async function postCsrfInterceptor(response: Response) {
-    if (response.status == 419) {
-      console.log('pook')
+      return request
     }
 
-    return response
+    client.interceptors.request.use(csrfInterceptor)
+
+    // async function postCsrfInterceptor(response: Response, request: Request, opts: ResolvedRequestOptions) {
+    //   if (response.status != 419) {
+    //     return response
+    //   }
+    //
+    //   if (csrfPromise) {
+    //     await csrfPromise
+    //   } else {
+    //     csrfPromise = $fetch.raw('/api/sanctum/csrf-cookie')
+    //     await csrfPromise
+    //     csrfPromise = null
+    //   }
+    //
+    //   console.log(response)
+    //   console.log(request)
+    //   console.log(opts)
+    // }
+    //
+    // client.interceptors.response.use(postCsrfInterceptor)
+
+    const apiBaseUrl = useRuntimeConfig().BACKEND_BASE_URL as string
+
+    client.setConfig({
+      baseUrl: import.meta.server ? apiBaseUrl : '/',
+      credentials: 'include'
+    })
   }
-
-  client.interceptors.response.use(postCsrfInterceptor)
-
-  client.setConfig({
-    baseUrl: '/'
-  })
 })

@@ -22,9 +22,7 @@ export const useUserStore = defineStore('user', () => {
   async function fetchUser() {
     isLoading.value = true
 
-    const { data, response } = await gU({
-      credentials: 'include'
-    })
+    const { data, response } = await gU()
 
     if (response.status === 200 && data?.data) {
       setUser(data.data)

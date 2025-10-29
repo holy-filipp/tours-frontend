@@ -5,7 +5,7 @@
     </template>
     <UNavigationMenu :items="items" />
     <template v-if="user.isLoading" #right>
-      <USkeleton class="w-[100px] h-24" />
+      Загрузка...
     </template>
     <template v-else-if="!user.isAuthed" #right>
       <UFieldGroup>
@@ -17,8 +17,8 @@
       <UDropdownMenu :items="DROPDOWN">
         <UUser
           :avatar="{
-            src: 'https://i.pravatar.cc/300'
-          }"
+          src: 'https://i.pravatar.cc/300'
+        }"
           :name="user.user.first_name"
           :description="user.user.role"
         />

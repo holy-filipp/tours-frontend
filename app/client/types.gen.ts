@@ -112,14 +112,14 @@ export type E55709238E32Fe7D749B26E30Responses = {
 
 export type E55709238E32Fe7D749B26E30Response = E55709238E32Fe7D749B26E30Responses[keyof E55709238E32Fe7D749B26E30Responses];
 
-export type B5A8E97C01De37E7F49653dData = {
+export type GetUdmurtiaPageData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/api/content/udmurtia';
 };
 
-export type B5A8E97C01De37E7F49653dErrors = {
+export type GetUdmurtiaPageErrors = {
     /**
      * Пользователь не авторизирован
      */
@@ -128,9 +128,9 @@ export type B5A8E97C01De37E7F49653dErrors = {
     };
 };
 
-export type B5A8E97C01De37E7F49653dError = B5A8E97C01De37E7F49653dErrors[keyof B5A8E97C01De37E7F49653dErrors];
+export type GetUdmurtiaPageError = GetUdmurtiaPageErrors[keyof GetUdmurtiaPageErrors];
 
-export type B5A8E97C01De37E7F49653dResponses = {
+export type GetUdmurtiaPageResponses = {
     /**
      * Успешный вывод контента
      */
@@ -147,7 +147,7 @@ export type B5A8E97C01De37E7F49653dResponses = {
     };
 };
 
-export type B5A8E97C01De37E7F49653dResponse = B5A8E97C01De37E7F49653dResponses[keyof B5A8E97C01De37E7F49653dResponses];
+export type GetUdmurtiaPageResponse = GetUdmurtiaPageResponses[keyof GetUdmurtiaPageResponses];
 
 export type Ffba1E96F748Cd3857A2B9482Cef3EbData = {
     body: {

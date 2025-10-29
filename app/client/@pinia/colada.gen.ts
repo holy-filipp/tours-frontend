@@ -4,8 +4,8 @@ import { type _JSONValue, defineQueryOptions, type UseMutationOptions } from '@p
 
 import { serializeQueryKeyValue } from '../client';
 import { client } from '../client.gen';
-import { b3A9Db44Be281C210Db1Dc5686205879, b5A8E97C01De37E7F49653D, be28363C04C1Cd7C100107417E944C1, bedf832894D55C9C5A4693541B0B2A5, d872D3E3A28C31D4C30C076F70E11D7, e55709238E32Fe7D749B26E30, ffba1E96F748Cd3857A2B9482Cef3Eb, getCsrfCookie, getUser, type Options, signin, signup } from '../sdk.gen';
-import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Error, B3A9Db44Be281C210Db1Dc5686205879Response, B5A8E97C01De37E7F49653dData, Be28363C04C1Cd7C100107417E944C1Data, Bedf832894D55C9C5A4693541B0B2A5Data, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Error, D872D3E3A28C31D4C30C076F70E11D7Response, E55709238E32Fe7D749B26E30Data, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, GetCsrfCookieData, GetUserData, SigninData, SigninError, SigninResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
+import { b3A9Db44Be281C210Db1Dc5686205879, be28363C04C1Cd7C100107417E944C1, bedf832894D55C9C5A4693541B0B2A5, d872D3E3A28C31D4C30C076F70E11D7, e55709238E32Fe7D749B26E30, ffba1E96F748Cd3857A2B9482Cef3Eb, getCsrfCookie, getUdmurtiaPage, getUser, type Options, signin, signup } from '../sdk.gen';
+import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Error, B3A9Db44Be281C210Db1Dc5686205879Response, Be28363C04C1Cd7C100107417E944C1Data, Bedf832894D55C9C5A4693541B0B2A5Data, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Error, D872D3E3A28C31D4C30C076F70E11D7Response, E55709238E32Fe7D749B26E30Data, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, GetCsrfCookieData, GetUdmurtiaPageData, GetUserData, SigninData, SigninError, SigninResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'path'> & {
@@ -100,17 +100,17 @@ export const e55709238E32Fe7D749B26E30Query = defineQueryOptions((options?: Opti
     }
 }));
 
-export const b5A8E97C01De37E7F49653dQueryKey = (options?: Options<B5A8E97C01De37E7F49653dData>) => createQueryKey('b5A8E97C01De37E7F49653D', options);
+export const getUdmurtiaPageQueryKey = (options?: Options<GetUdmurtiaPageData>) => createQueryKey('getUdmurtiaPage', options);
 
 /**
  * Контент по Удмуртии
  *
  * Возвращает статический контент в формате markdown для страницы
  */
-export const b5A8E97C01De37E7F49653dQuery = defineQueryOptions((options?: Options<B5A8E97C01De37E7F49653dData>) => ({
-    key: b5A8E97C01De37E7F49653dQueryKey(options),
+export const getUdmurtiaPageQuery = defineQueryOptions((options?: Options<GetUdmurtiaPageData>) => ({
+    key: getUdmurtiaPageQueryKey(options),
     query: async (context) => {
-        const { data } = await b5A8E97C01De37E7F49653D({
+        const { data } = await getUdmurtiaPage({
             ...options,
             ...context,
             throwOnError: true

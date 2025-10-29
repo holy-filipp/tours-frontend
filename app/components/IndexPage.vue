@@ -1,18 +1,14 @@
 <template>
   <UContainer class="p-4">
-    <MDC :value="value" />
+    <div v-if="isLoading">Загрузка...</div>
+    <MDC v-else-if="data?.data?.content" :value="data.data.content"/>
   </UContainer>
 </template>
 
 <script lang="ts" setup>
-const value = `# Hello World
+import {getUdmurtiaPageQuery} from "~/client/@pinia/colada.gen";
 
-Learn more about the **MDC** component in the [documentation](https://github.com/nuxt-modules/mdc).
-
-::card
-Контент карты
-::
-`
+const { data, isLoading } = useQuery(getUdmurtiaPageQuery)
 </script>
 
 <style lang="scss" scoped>
