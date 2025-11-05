@@ -20,3 +20,33 @@ export function createDateFromTimeString(timeString: string) {
 export function createDateStringFromDate(date: Date) {
   return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
 }
+
+const DAY_RULES: Record<Intl.LDMLPluralRule, string> = {
+  one: 'день',
+  few: 'дня',
+  many: 'дней',
+  zero: '',
+  two: '',
+  other: '',
+}
+
+export function getDayWithDeclination(day: number) {
+  const p = new Intl.PluralRules('ru-RU')
+
+  return `${day} ${DAY_RULES[p.select(day)]}`
+}
+
+const YEAR_RULES: Record<Intl.LDMLPluralRule, string> = {
+  one: 'год',
+  few: 'года',
+  many: 'лет',
+  zero: '',
+  two: '',
+  other: '',
+}
+
+export function getYearWithDeclination(year: number) {
+  const p = new Intl.PluralRules('ru-RU')
+
+  return `${year} ${YEAR_RULES[p.select(year)]}`
+}

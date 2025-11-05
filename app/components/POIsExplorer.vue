@@ -1,11 +1,13 @@
 <template>
   <UContainer class="p-4 space-y-4">
     <UBreadcrumb :items="BREADCRUMBS" />
-    <UPageCTA
-      title="Интересная Удмуртия"
-      description="Здесь отображены достопримечательности Удмуртии загруженные нашими пользователями. Присоединяйтесь к ним и поделитесь своими интересными местами!"
-      :links="LINKS"
-    />
+    <ClientOnly>
+      <UPageCTA
+        title="Интересная Удмуртия"
+        description="Здесь отображены достопримечательности Удмуртии загруженные нашими пользователями. Присоединяйтесь к ним и поделитесь своими интересными местами!"
+        :links="links"
+      />
+    </ClientOnly>
     <UPageGrid>
       <UPageCard
         title="Филипп"
@@ -22,19 +24,37 @@
 import type {ButtonProps} from "#ui/components/Button.vue";
 import type {BreadcrumbItem} from "@nuxt/ui";
 
+const user = useUserStore()
+const links = ref<ButtonProps[]>([])
+
+user.$subscribe(() => {
+  if (user.isAuthed) {
+    links.value = []
+
+    links.value.push({
+      label: 'Загрузить',
+      icon: 'i-lucide-upload',
+      to: '/pois/create'
+    })
+  } else {
+    links.value = []
+
+    links.value.push({
+      label: 'Чтобы загрузить, нужно войти',
+      icon: 'i-lucide-log-in',
+      to: '/signin'
+    })
+  }
+}, {
+  immediate: true
+})
+
 const BREADCRUMBS: BreadcrumbItem[] = [
   {
     label: 'Достопримечательности',
     icon: 'i-lucide-map-pin',
     to: '/pois',
   },
-]
-const LINKS: ButtonProps[] = [
-  {
-    label: 'Загрузить',
-    icon: 'i-lucide-upload',
-    to: '/pois/create'
-  }
 ]
 </script>
 

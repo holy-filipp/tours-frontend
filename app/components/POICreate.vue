@@ -14,7 +14,8 @@
           accept=".png,.jpg,.jpeg"
         />
       </UFormField>
-      <UButton type="submit" icon="i-lucide-upload" label="Загрузить" />
+      <UButton :loading="asyncStatus === 'loading'" type="submit" icon="i-lucide-upload" label="Загрузить" />
+      <UAlert v-if="createPoi.status === 'error'">{{ createPoi.error }}</UAlert>
     </UForm>
   </UContainer>
 </template>
@@ -22,6 +23,7 @@
 <script lang="ts" setup>
 import type {BreadcrumbItem, FormSubmitEvent} from "@nuxt/ui";
 import * as v from 'valibot'
+import {createPoiMutation} from "~/client/@pinia/colada.gen";
 
 const BREADCRUMBS: BreadcrumbItem[] = [
   {
@@ -47,8 +49,22 @@ const state = reactive({
   file: undefined
 })
 
+const { state: createPoi, mutateAsync, asyncStatus } = useMutation(createPoiMutation())
+
+const toast = useToast()
+
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  console.log(event.data)
+  await mutateAsync({
+    body: {
+      file: event.data.file,
+      description: event.data.description
+    }
+  })
+
+  toast.add({
+    title: 'Успех',
+    description: 'Точка добавлена'
+  })
 }
 </script>
 

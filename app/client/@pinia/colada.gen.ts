@@ -4,8 +4,8 @@ import { type _JSONValue, defineQueryOptions, type UseMutationOptions } from '@p
 
 import { serializeQueryKeyValue } from '../client';
 import { client } from '../client.gen';
-import { b3A9Db44Be281C210Db1Dc5686205879, be28363C04C1Cd7C100107417E944C1, bedf832894D55C9C5A4693541B0B2A5, d872D3E3A28C31D4C30C076F70E11D7, e55709238E32Fe7D749B26E30, ffba1E96F748Cd3857A2B9482Cef3Eb, getCsrfCookie, getUdmurtiaPage, getUser, type Options, signin, signup } from '../sdk.gen';
-import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Error, B3A9Db44Be281C210Db1Dc5686205879Response, Be28363C04C1Cd7C100107417E944C1Data, Bedf832894D55C9C5A4693541B0B2A5Data, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Error, D872D3E3A28C31D4C30C076F70E11D7Response, E55709238E32Fe7D749B26E30Data, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, GetCsrfCookieData, GetUdmurtiaPageData, GetUserData, SigninData, SigninError, SigninResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
+import { createComplexTrip, createPoi, createTrip, editTrip, ffba1E96F748Cd3857A2B9482Cef3Eb, getCsrfCookie, getPois, getTripById, getTrips, getUdmurtiaPage, getUser, type Options, searchTrips, signin, signup } from '../sdk.gen';
+import type { CreateComplexTripData, CreateComplexTripError, CreateComplexTripResponse, CreatePoiData, CreatePoiError, CreatePoiResponse, CreateTripData, CreateTripError, CreateTripResponse, EditTripData, EditTripError, EditTripResponse, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbError, Ffba1E96F748Cd3857A2B9482Cef3EbResponse, GetCsrfCookieData, GetPoisData, GetTripByIdData, GetTripsData, GetUdmurtiaPageData, GetUserData, SearchTripsData, SigninData, SigninError, SigninResponse, SignupData, SignupError, SignupResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'path'> & {
@@ -68,10 +68,10 @@ export const getCsrfCookieQuery = defineQueryOptions((options?: Options<GetCsrfC
  *
  * Создаёт и возвращает новую достопримечательность в случае успеха
  */
-export const b3A9Db44Be281C210Db1Dc5686205879Mutation = (options?: Partial<Options<B3A9Db44Be281C210Db1Dc5686205879Data>>): UseMutationOptions<B3A9Db44Be281C210Db1Dc5686205879Response, Options<B3A9Db44Be281C210Db1Dc5686205879Data>, B3A9Db44Be281C210Db1Dc5686205879Error> => {
+export const createPoiMutation = (options?: Partial<Options<CreatePoiData>>): UseMutationOptions<CreatePoiResponse, Options<CreatePoiData>, CreatePoiError> => {
     return {
         mutation: async (fnOptions) => {
-            const { data } = await b3A9Db44Be281C210Db1Dc5686205879({
+            const { data } = await createPoi({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -81,17 +81,17 @@ export const b3A9Db44Be281C210Db1Dc5686205879Mutation = (options?: Partial<Optio
     };
 };
 
-export const e55709238E32Fe7D749B26E30QueryKey = (options?: Options<E55709238E32Fe7D749B26E30Data>) => createQueryKey('e55709238E32Fe7D749B26E30', options);
+export const getPoisQueryKey = (options?: Options<GetPoisData>) => createQueryKey('getPois', options);
 
 /**
  * Получить список достопримечательностей
  *
  * Возвращает список всех достопримечательностей
  */
-export const e55709238E32Fe7D749B26E30Query = defineQueryOptions((options?: Options<E55709238E32Fe7D749B26E30Data>) => ({
-    key: e55709238E32Fe7D749B26E30QueryKey(options),
+export const getPoisQuery = defineQueryOptions((options?: Options<GetPoisData>) => ({
+    key: getPoisQueryKey(options),
     query: async (context) => {
-        const { data } = await e55709238E32Fe7D749B26E30({
+        const { data } = await getPois({
             ...options,
             ...context,
             throwOnError: true
@@ -138,14 +138,14 @@ export const ffba1E96F748Cd3857A2B9482Cef3EbMutation = (options?: Partial<Option
 };
 
 /**
- * Создать экскурсию, маршрут и точки
+ * Создать экскурсию
  *
- * Создаёт и возвращает новую экскурсию, маршрут и привязанные к нему точки. Всё в одном запросе
+ * Создаёт и возвращает новую экскурсию
  */
-export const d872D3E3A28C31D4C30C076F70E11D7Mutation = (options?: Partial<Options<D872D3E3A28C31D4C30C076F70E11D7Data>>): UseMutationOptions<D872D3E3A28C31D4C30C076F70E11D7Response, Options<D872D3E3A28C31D4C30C076F70E11D7Data>, D872D3E3A28C31D4C30C076F70E11D7Error> => {
+export const createTripMutation = (options?: Partial<Options<CreateTripData>>): UseMutationOptions<CreateTripResponse, Options<CreateTripData>, CreateTripError> => {
     return {
         mutation: async (fnOptions) => {
-            const { data } = await d872D3E3A28C31D4C30C076F70E11D7({
+            const { data } = await createTrip({
                 ...options,
                 ...fnOptions,
                 throwOnError: true
@@ -155,17 +155,17 @@ export const d872D3E3A28C31D4C30C076F70E11D7Mutation = (options?: Partial<Option
     };
 };
 
-export const be28363C04C1Cd7C100107417E944C1QueryKey = (options?: Options<Be28363C04C1Cd7C100107417E944C1Data>) => createQueryKey('be28363C04C1Cd7C100107417E944C1', options);
+export const getTripByIdQueryKey = (options: Options<GetTripByIdData>) => createQueryKey('getTripById', options);
 
 /**
- * Получить все экскурсии
+ * Получить экскурсию
  *
- * Запрос для получения списка всех экскурсий вместе с точками и маршрутами (пагинация лень пока)
+ * Запрос для получения экскурсии и её связей по ID
  */
-export const be28363C04C1Cd7C100107417E944C1Query = defineQueryOptions((options?: Options<Be28363C04C1Cd7C100107417E944C1Data>) => ({
-    key: be28363C04C1Cd7C100107417E944C1QueryKey(options),
+export const getTripByIdQuery = defineQueryOptions((options: Options<GetTripByIdData>) => ({
+    key: getTripByIdQueryKey(options),
     query: async (context) => {
-        const { data } = await be28363C04C1Cd7C100107417E944C1({
+        const { data } = await getTripById({
             ...options,
             ...context,
             throwOnError: true
@@ -174,17 +174,72 @@ export const be28363C04C1Cd7C100107417E944C1Query = defineQueryOptions((options?
     }
 }));
 
-export const bedf832894D55C9C5A4693541B0B2A5QueryKey = (options: Options<Bedf832894D55C9C5A4693541B0B2A5Data>) => createQueryKey('bedf832894D55C9C5A4693541B0B2A5', options);
+/**
+ * Изменить экскурсию
+ *
+ * Запрос для изменения экскурсии по ID
+ */
+export const editTripMutation = (options?: Partial<Options<EditTripData>>): UseMutationOptions<EditTripResponse, Options<EditTripData>, EditTripError> => {
+    return {
+        mutation: async (fnOptions) => {
+            const { data } = await editTrip({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+};
+
+/**
+ * Создать экскурсию, маршрут и точки
+ *
+ * Создаёт и возвращает новую экскурсию, маршрут и привязанные к нему точки. Всё в одном запросе
+ */
+export const createComplexTripMutation = (options?: Partial<Options<CreateComplexTripData>>): UseMutationOptions<CreateComplexTripResponse, Options<CreateComplexTripData>, CreateComplexTripError> => {
+    return {
+        mutation: async (fnOptions) => {
+            const { data } = await createComplexTrip({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+};
+
+export const getTripsQueryKey = (options?: Options<GetTripsData>) => createQueryKey('getTrips', options);
+
+/**
+ * Получить все экскурсии
+ *
+ * Запрос для получения списка всех экскурсий вместе с точками и маршрутами (пагинация лень пока)
+ */
+export const getTripsQuery = defineQueryOptions((options?: Options<GetTripsData>) => ({
+    key: getTripsQueryKey(options),
+    query: async (context) => {
+        const { data } = await getTrips({
+            ...options,
+            ...context,
+            throwOnError: true
+        });
+        return data;
+    }
+}));
+
+export const searchTripsQueryKey = (options?: Options<SearchTripsData>) => createQueryKey('searchTrips', options);
 
 /**
  * Поиск по экскурсиям, точкам и маршрутам
  *
  * Запрос для поиска по всем маршрутам, точкам и экскурсиям. Ищет в полях description, name и start_location
  */
-export const bedf832894D55C9C5A4693541B0B2A5Query = defineQueryOptions((options: Options<Bedf832894D55C9C5A4693541B0B2A5Data>) => ({
-    key: bedf832894D55C9C5A4693541B0B2A5QueryKey(options),
+export const searchTripsQuery = defineQueryOptions((options?: Options<SearchTripsData>) => ({
+    key: searchTripsQueryKey(options),
     query: async (context) => {
-        const { data } = await bedf832894D55C9C5A4693541B0B2A5({
+        const { data } = await searchTrips({
             ...options,
             ...context,
             throwOnError: true

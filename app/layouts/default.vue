@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AppHeader />
+    <ClientOnly fallback-tag="span" fallback="Загрузка шапки...">
+      <AppHeader />
+    </ClientOnly>
     <UMain>
       <slot />
     </UMain>

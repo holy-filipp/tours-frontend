@@ -1,3 +1,5 @@
+import { useUserStore } from "~/stores/user"
+
 export default defineNuxtPlugin({
   name: 'restore-session',
   dependsOn: ['setup-client'],

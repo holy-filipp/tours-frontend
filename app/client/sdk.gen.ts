@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { B3A9Db44Be281C210Db1Dc5686205879Data, B3A9Db44Be281C210Db1Dc5686205879Errors, B3A9Db44Be281C210Db1Dc5686205879Responses, Be28363C04C1Cd7C100107417E944C1Data, Be28363C04C1Cd7C100107417E944C1Errors, Be28363C04C1Cd7C100107417E944C1Responses, Bedf832894D55C9C5A4693541B0B2A5Data, Bedf832894D55C9C5A4693541B0B2A5Errors, Bedf832894D55C9C5A4693541B0B2A5Responses, D872D3E3A28C31D4C30C076F70E11D7Data, D872D3E3A28C31D4C30C076F70E11D7Errors, D872D3E3A28C31D4C30C076F70E11D7Responses, E55709238E32Fe7D749B26E30Data, E55709238E32Fe7D749B26E30Errors, E55709238E32Fe7D749B26E30Responses, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbErrors, Ffba1E96F748Cd3857A2B9482Cef3EbResponses, GetCsrfCookieData, GetCsrfCookieResponses, GetUdmurtiaPageData, GetUdmurtiaPageErrors, GetUdmurtiaPageResponses, GetUserData, GetUserErrors, GetUserResponses, SigninData, SigninErrors, SigninResponses, SignupData, SignupErrors, SignupResponses } from './types.gen';
+import type { CreateComplexTripData, CreateComplexTripErrors, CreateComplexTripResponses, CreatePoiData, CreatePoiErrors, CreatePoiResponses, CreateTripData, CreateTripErrors, CreateTripResponses, EditTripData, EditTripErrors, EditTripResponses, Ffba1E96F748Cd3857A2B9482Cef3EbData, Ffba1E96F748Cd3857A2B9482Cef3EbErrors, Ffba1E96F748Cd3857A2B9482Cef3EbResponses, GetCsrfCookieData, GetCsrfCookieResponses, GetPoisData, GetPoisResponses, GetTripByIdData, GetTripByIdErrors, GetTripByIdResponses, GetTripsData, GetTripsResponses, GetUdmurtiaPageData, GetUdmurtiaPageErrors, GetUdmurtiaPageResponses, GetUserData, GetUserErrors, GetUserResponses, SearchTripsData, SearchTripsErrors, SearchTripsResponses, SigninData, SigninErrors, SigninResponses, SignupData, SignupErrors, SignupResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -35,8 +35,8 @@ export const getCsrfCookie = <ThrowOnError extends boolean = false>(options?: Op
  *
  * Создаёт и возвращает новую достопримечательность в случае успеха
  */
-export const b3A9Db44Be281C210Db1Dc5686205879 = <ThrowOnError extends boolean = false>(options: Options<B3A9Db44Be281C210Db1Dc5686205879Data, ThrowOnError>) => {
-    return (options.client ?? client).post<B3A9Db44Be281C210Db1Dc5686205879Responses, B3A9Db44Be281C210Db1Dc5686205879Errors, ThrowOnError>({
+export const createPoi = <ThrowOnError extends boolean = false>(options: Options<CreatePoiData, ThrowOnError>) => {
+    return (options.client ?? client).post<CreatePoiResponses, CreatePoiErrors, ThrowOnError>({
         ...formDataBodySerializer,
         url: '/api/poi/create',
         ...options,
@@ -52,8 +52,8 @@ export const b3A9Db44Be281C210Db1Dc5686205879 = <ThrowOnError extends boolean = 
  *
  * Возвращает список всех достопримечательностей
  */
-export const e55709238E32Fe7D749B26E30 = <ThrowOnError extends boolean = false>(options?: Options<E55709238E32Fe7D749B26E30Data, ThrowOnError>) => {
-    return (options?.client ?? client).get<E55709238E32Fe7D749B26E30Responses, E55709238E32Fe7D749B26E30Errors, ThrowOnError>({
+export const getPois = <ThrowOnError extends boolean = false>(options?: Options<GetPoisData, ThrowOnError>) => {
+    return (options?.client ?? client).get<GetPoisResponses, unknown, ThrowOnError>({
         url: '/api/poi/list',
         ...options
     });
@@ -89,12 +89,56 @@ export const ffba1E96F748Cd3857A2B9482Cef3Eb = <ThrowOnError extends boolean = f
 };
 
 /**
+ * Создать экскурсию
+ *
+ * Создаёт и возвращает новую экскурсию
+ */
+export const createTrip = <ThrowOnError extends boolean = false>(options?: Options<CreateTripData, ThrowOnError>) => {
+    return (options?.client ?? client).post<CreateTripResponses, CreateTripErrors, ThrowOnError>({
+        url: '/api/trip',
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...options?.headers
+        }
+    });
+};
+
+/**
+ * Получить экскурсию
+ *
+ * Запрос для получения экскурсии и её связей по ID
+ */
+export const getTripById = <ThrowOnError extends boolean = false>(options: Options<GetTripByIdData, ThrowOnError>) => {
+    return (options.client ?? client).get<GetTripByIdResponses, GetTripByIdErrors, ThrowOnError>({
+        url: '/api/trip/{id}',
+        ...options
+    });
+};
+
+/**
+ * Изменить экскурсию
+ *
+ * Запрос для изменения экскурсии по ID
+ */
+export const editTrip = <ThrowOnError extends boolean = false>(options: Options<EditTripData, ThrowOnError>) => {
+    return (options.client ?? client).patch<EditTripResponses, EditTripErrors, ThrowOnError>({
+        url: '/api/trip/{id}',
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...options.headers
+        }
+    });
+};
+
+/**
  * Создать экскурсию, маршрут и точки
  *
  * Создаёт и возвращает новую экскурсию, маршрут и привязанные к нему точки. Всё в одном запросе
  */
-export const d872D3E3A28C31D4C30C076F70E11D7 = <ThrowOnError extends boolean = false>(options?: Options<D872D3E3A28C31D4C30C076F70E11D7Data, ThrowOnError>) => {
-    return (options?.client ?? client).post<D872D3E3A28C31D4C30C076F70E11D7Responses, D872D3E3A28C31D4C30C076F70E11D7Errors, ThrowOnError>({
+export const createComplexTrip = <ThrowOnError extends boolean = false>(options?: Options<CreateComplexTripData, ThrowOnError>) => {
+    return (options?.client ?? client).post<CreateComplexTripResponses, CreateComplexTripErrors, ThrowOnError>({
         url: '/api/trip/complex',
         ...options,
         headers: {
@@ -109,8 +153,8 @@ export const d872D3E3A28C31D4C30C076F70E11D7 = <ThrowOnError extends boolean = f
  *
  * Запрос для получения списка всех экскурсий вместе с точками и маршрутами (пагинация лень пока)
  */
-export const be28363C04C1Cd7C100107417E944C1 = <ThrowOnError extends boolean = false>(options?: Options<Be28363C04C1Cd7C100107417E944C1Data, ThrowOnError>) => {
-    return (options?.client ?? client).get<Be28363C04C1Cd7C100107417E944C1Responses, Be28363C04C1Cd7C100107417E944C1Errors, ThrowOnError>({
+export const getTrips = <ThrowOnError extends boolean = false>(options?: Options<GetTripsData, ThrowOnError>) => {
+    return (options?.client ?? client).get<GetTripsResponses, unknown, ThrowOnError>({
         url: '/api/trip/list',
         ...options
     });
@@ -121,8 +165,8 @@ export const be28363C04C1Cd7C100107417E944C1 = <ThrowOnError extends boolean = f
  *
  * Запрос для поиска по всем маршрутам, точкам и экскурсиям. Ищет в полях description, name и start_location
  */
-export const bedf832894D55C9C5A4693541B0B2A5 = <ThrowOnError extends boolean = false>(options: Options<Bedf832894D55C9C5A4693541B0B2A5Data, ThrowOnError>) => {
-    return (options.client ?? client).get<Bedf832894D55C9C5A4693541B0B2A5Responses, Bedf832894D55C9C5A4693541B0B2A5Errors, ThrowOnError>({
+export const searchTrips = <ThrowOnError extends boolean = false>(options?: Options<SearchTripsData, ThrowOnError>) => {
+    return (options?.client ?? client).get<SearchTripsResponses, SearchTripsErrors, ThrowOnError>({
         url: '/api/trip/search',
         ...options
     });
