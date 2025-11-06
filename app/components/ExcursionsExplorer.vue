@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import type {BreadcrumbItem} from "@nuxt/ui";
 import UIconData from "~/components/ui/UIconData.vue";
-import {getTripsQuery, searchTripsQuery} from "~/client/@pinia/colada.gen";
+import {searchTripsQuery} from "~/client/@pinia/colada.gen";
 import {getDayWithDeclination} from "~/utils/time";
 
 const BREADCRUMBS: BreadcrumbItem[] = [
