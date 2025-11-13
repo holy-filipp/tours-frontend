@@ -1,7 +1,7 @@
 <template>
   <UContainer class="p-4">
     <div v-if="isLoading">Загрузка...</div>
-    <div v-else-if="page?.data?.content">{{ page.data.content }}</div>
+    <MDC v-else-if="page?.data?.content" :value="page.data.content" />
   </UContainer>
 </template>
 

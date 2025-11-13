@@ -15,7 +15,7 @@
         />
       </UFormField>
       <UButton :loading="asyncStatus === 'loading'" type="submit" icon="i-lucide-upload" label="Загрузить" />
-      <UAlert v-if="createPoi.status === 'error'">{{ createPoi.error }}</UAlert>
+      <UAlert v-if="createPoi.status === 'error'" color="error" :title="getPrettyMessage(createPoi.error.message)" :description="getPrettyErrors(createPoi.error.errors)" />
     </UForm>
   </UContainer>
 </template>
@@ -52,6 +52,7 @@ const state = reactive({
 const { state: createPoi, mutateAsync, asyncStatus } = useMutation(createPoiMutation())
 
 const toast = useToast()
+const router = useRouter()
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   await mutateAsync({
@@ -65,6 +66,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     title: 'Успех',
     description: 'Точка добавлена'
   })
+
+  await router.push('/pois')
 }
 </script>
 

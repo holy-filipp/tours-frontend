@@ -5,6 +5,7 @@ const API_MESSAGES: Record<string, string> = {
 
 const API_ERRORS: Record<string, string> = {
   'The email has already been taken.': 'Пользователь с таким email уже существует',
+  'The file failed to upload.': 'Не удалось загрузить файл по неизвестной причине',
 }
 
 export function getPrettyMessage(e: string) {
